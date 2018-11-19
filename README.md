@@ -37,6 +37,5 @@
     推流过程中，网络波动是很正常的，为了保证推流的稳定性，SDK提供了动态码率调整功能。minBitrate：调整码率的下限，maxBitrate：码率调整的上限。
     码率的下限表示无论网络多差，需要保证最低画质质量传输，码率的上限表示无论网络多好，传输的画质保证稳定即可。建议：minBitrate为宽*高/2，
     maxBitrate为宽*高*2
-    ···
+    
     - (ArcStreamErrorType)setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
-    ···
