@@ -48,4 +48,9 @@
     观众可以听到
     
     - (void) enableAudioMute:(BOOL) state
-
+    
+## 支持黑帧功能
+    可以通过调用enableVideoBlackFrame来启用或停用黑帧功能，作用是控制观众是否看见主播端画面（启用后看到的是黑屏画面）。state：YES表示启用黑帧，
+    观众看到是黑屏画面，NO表示停用黑帧，观众可以看到
+    
+    - (void) enableVideoBlackFrame:(BOOL) state
