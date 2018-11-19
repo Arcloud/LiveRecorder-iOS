@@ -44,13 +44,19 @@
     启用自动重连enableAutoConnect，可以在推流过程中发生异常后尝试后台重连3次。启用强制重连forceReConnect，会强制重置缓存并且重新推流。
     
 ## 支持静音功能
-    可以通过调用enableAudioMute来启用或停用静音功能，作用是控制观众是否听到主播端的声音。state：YES表示启用静音，观众听不到，NO表示停用静音，
+    通过调用enableAudioMute来启用或停用静音功能，作用是控制观众是否听到主播端的声音。state：YES表示启用静音，观众听不到，NO表示停用静音，
     观众可以听到
     
     - (void) enableAudioMute:(BOOL) state
     
 ## 支持黑帧功能
-    可以通过调用enableVideoBlackFrame来启用或停用黑帧功能，作用是控制观众是否看见主播端画面（启用后看到的是黑屏画面）。state：YES表示启用黑帧，
+    通过调用enableVideoBlackFrame来启用或停用黑帧功能，作用是控制观众是否看见主播端画面（启用后看到的是黑屏画面）。state：YES表示启用黑帧，
     观众看到是黑屏画面，NO表示停用黑帧，观众可以看到
     
     - (void) enableVideoBlackFrame:(BOOL) state
+
+## 支持画面镜像功能
+    SDK内部不关心源的方向，调用enablePreviewMirror可以将当前视频帧镜像，该操作影响到预览以及输出的画面。如果只是想达到系统camera的前置镜像
+    又不修改源，那么建议是设置Camera的镜像即可，而不是调用该接口。
+    
+    - (void) enablePreviewMirror:(BOOL) state
