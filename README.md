@@ -18,7 +18,7 @@
     fps：20~25之间，如果有特殊分辨率或者对音频采样有要求，可以通过- (void) setVideoInfo:(LPSTREAMVIDEOINFO) videoinfo 
     audioInfo:(LPSTREAMAUDIOINFO) audioInfo来设置。
     注意：设置ArcVideoProfile会对源进行裁剪（不关心源宽高比），而setVideoInfo不会对源裁剪，需要保证源和设置的dwPicWidth宽dwPicHeight高比一致才
-    不会产生拉伸问题，如源720x1280，设置的dwPicWidth宽dwPicHeight高为360x640，由于都是16：9，所以不会产生拉伸问题
+    不会产生拉伸问题，如源720x1280，设置的dwPicWidth宽dwPicHeight高为360x640，由于宽高比都是9:16，所以不会产生拉伸问题
     
    | 输出分辨率  | 帧率    |  枚举值  |
    | --------   | -----:   | :----: |
@@ -33,4 +33,10 @@
    | 1280x720        | fps      |   ArcVideoProfile_Landscape_720P   |
    | 1920x1080        | fps      |   ArcVideoProfile_Landscape_1080P  |
 
-    
+## 支持动态码率
+    推流过程中，网络波动是很正常的，为了保证推流的稳定性，SDK提供了动态码率调整功能。minBitrate：调整码率的下限，maxBitrate：码率调整的上限。
+    码率的下限表示无论网络多差，需要保证最低画质质量传输，码率的上限表示无论网络多好，传输的画质保证稳定即可。建议：minBitrate为宽*高/2，
+    maxBitrate为宽*高*2
+    ···
+    - (ArcStreamErrorType)setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
+    ···
