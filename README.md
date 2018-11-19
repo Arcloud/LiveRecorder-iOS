@@ -15,7 +15,10 @@
     
 ## 支持输出分辨率
     不关心源的video分辨率，根据用户设置的输出分辨率进行处理。支持输出分辨率如下：（后续根据需要添加），fps帧率需要在设置该枚举时候同步传入，建议
-    fps：20~25之间
+    fps：20~25之间，如果有特殊分辨率或者对音频采样有要求，可以通过- (void) setVideoInfo:(LPSTREAMVIDEOINFO) videoinfo 
+    audioInfo:(LPSTREAMAUDIOINFO) audioInfo来设置。
+    注意：设置ArcVideoProfile会对源进行裁剪（不关心源宽高比），而setVideoInfo不会对源裁剪，需要保证源和设置的dwPicWidth宽dwPicHeight高比一致才
+    不会产生拉伸问题，如源720x1280，设置的dwPicWidth宽dwPicHeight高为360x640，由于都是16：9，所以不会产生拉伸问题
     
    | 输出分辨率  | 帧率    |  枚举值  |
    | --------   | -----:   | :----: |
