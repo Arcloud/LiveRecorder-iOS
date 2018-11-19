@@ -39,3 +39,13 @@
     maxBitrate为宽*高*2
     
     - (ArcStreamErrorType)setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
+
+## 支持自动或强制重连
+    启用自动重连enableAutoConnect，可以在推流过程中发生异常后尝试后台重连3次。启用强制重连forceReConnect，会强制重置缓存并且重新推流。
+    
+## 支持静音功能
+    可以通过调用enableAudioMute来启用或停用静音功能，作用是控制观众是否听到主播端的声音。state：YES表示启用静音，观众听不到，NO表示停用静音，
+    观众可以听到
+    
+    - (void) enableAudioMute:(BOOL) state
+
