@@ -38,7 +38,7 @@
     码率的下限表示无论网络多差，需要保证最低画质质量传输，码率的上限表示无论网络多好，传输的画质保证稳定即可。建议：minBitrate为宽*高/2，
     maxBitrate为宽*高*2，默认打开并且min和max为建议值。
     
-    - (ArcStreamErrorType)setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
+    - (ArcStreamErrorType) setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
 
 ## 支持自动或强制重连
     启用自动重连enableAutoConnect，可以在推流过程中发生异常后尝试后台重连3次。启用强制重连forceReConnect，会强制重置缓存并且重新推流。
@@ -62,5 +62,31 @@
     - (void) enablePreviewMirror:(BOOL) state
 
 # 场景适配
-## 推流预览
+## 推流前以及推流中源的分辨率发生变化，如：横竖屏或者修改源的分辨率
 
+    1. 推流前的情况，在源分辨率发生变化后，需要及时通知SDK。
+        - (void) setVideoWidth:(NSInteger) width height:(NSInteger) height // 将最新的源分辨率通知SDK
+        - (void) updateLocalVideoCanvaFrame // 通知SDK预览刷新
+        
+    2. 推流中的情况，SDK不支持推流中修改源分辨率，需要停止推流后再参考步骤1处理。
+        - (void) stopStreaming
+
+## 需要推流前添加美颜以及特效处理
+    可以查看ArcFiltersController.h，里面提供了已经支持的美颜滤镜功能，美颜贴纸功能开启需要联系下售前。
+    
+    1. 初始化Filter句柄
+        _filtersController = [[ArcFiltersController alloc] initWithPresetSize:CGSizeMake(tempSize.width, tempSize.height)];
+        
+    2. 启用或关闭美颜，添加或移除某种滤镜
+        - (int) setBeautyState:(BOOL) state
+        或
+        - (int) addFilter:(int) filterType / - (void) removeFilter:(int) filterType
+        
+    3. 启用或关闭贴纸
+        - (void) set2DStickerResPath:(NSString *) path  // 设置贴纸的资源路径
+        - (int) enableSticker:(BOOL) state rotation:(int) rotation mirror:(BOOL) mirror
+        
+## 需要添加水印防盗功能
+    通过addWatermarkWithImage调用，在推流视频帧上添加logo，设置的rect相对于手机的预览区域，SDK会转换rect区域为相对于整张图像（以4个角
+    相对位置换算）
+    - (void) addWatermarkWithImage:(UIImage *) image info:(CGRect) rect
