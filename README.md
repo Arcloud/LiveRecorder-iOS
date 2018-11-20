@@ -86,7 +86,13 @@
         - (void) set2DStickerResPath:(NSString *) path  // 设置贴纸的资源路径
         - (int) enableSticker:(BOOL) state rotation:(int) rotation mirror:(BOOL) mirror
         
+    4. 启用美颜或贴纸，滤镜功能后，可以设置美白的变量、替换贴纸、变化滤镜的颜色值等
+        
 ## 需要添加水印防盗功能
     通过addWatermarkWithImage调用，在推流视频帧上添加logo，设置的rect相对于手机的预览区域，SDK会转换rect区域为相对于整张图像（以4个角
     相对位置换算）
     - (void) addWatermarkWithImage:(UIImage *) image info:(CGRect) rect
+
+# 示例Demo
+    参考samplecode目录示例，内部使用object-c接口，后续添加swift接口
+    
