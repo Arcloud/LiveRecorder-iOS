@@ -60,3 +60,7 @@
     又不修改源，那么建议是设置Camera的镜像即可，而不是调用该接口。
     
     - (void) enablePreviewMirror:(BOOL) state
+
+# 场景适配
+## 推流预览
+
