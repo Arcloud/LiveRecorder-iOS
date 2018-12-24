@@ -40,6 +40,15 @@
     
     - (ArcStreamErrorType) setMinBitrate:(NSUInteger)minBitrate maxBitrate:(NSUInteger)maxBitrate
 
+## 支持动态录制
+    推流过程中，可以创建录制或者停止录制功能（MP4格式存储）。
+    1. 设置录制文件路径以及文件名
+    - (int) enableDumpWithStorePath:(NSString *) path fileName:(NSString *) filename
+    2. 开始录制
+    - (int) startRecord
+    3. 停止录制
+    - (void) stopRecord
+    
 ## 支持自动或强制重连
     启用自动重连enableAutoConnect，可以在推流过程中发生异常后尝试后台重连3次。启用强制重连forceReConnect，会强制重置缓存并且重新推流。
     
@@ -92,6 +101,14 @@
     通过addWatermarkWithImage调用，在推流视频帧上添加logo，设置的rect相对于手机的预览区域，SDK会转换rect区域为相对于整张图像（以4个角
     相对位置换算）
     - (void) addWatermarkWithImage:(UIImage *) image info:(CGRect) rect
+    
+## 需要Log跟踪（添加App端日志）
+    1. 开启log打印，建议是一次推流对应一次log生成，停止推流后也停止log打印，新的推流需要重新开启log
+    + (void) openLogWithFileName:(NSString *) fileName
+    2. 需要插入app端的日志
+    + (void) writeTraceLog:(NSString *) format, ...
+    3. 停止log打印
+    + (void) closeLog
 
 # 示例Demo
     参考samplecode目录示例，内部使用object-c接口，后续添加swift接口
